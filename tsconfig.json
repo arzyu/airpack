@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "baseUrl": "./",
+    "outDir": "./dist"
+  },
+  "files": ["src/index.ts", "src/auto-webpack.ts"]
+}
