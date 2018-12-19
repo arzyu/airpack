@@ -7,8 +7,8 @@ import { spawnSync } from "child_process";
 import program from "commander-with-unknown-option-patched";
 import { extensions, Extension } from "interpret";
 import { Configuration } from "webpack";
+import { getPackageInfo } from "get-package-info";
 
-import { getPackageInfo } from "./utils";
 import autoWebpack from ".";
 
 program

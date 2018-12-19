@@ -2,8 +2,7 @@ import { resolve } from "path";
 
 import { Configuration } from "webpack";
 import merge from "webpack-merge";
-
-import { getPackageInfo } from "./utils";
+import { getPackageInfo } from "get-package-info";
 
 const getConfigs = () => {
   const configs: Configuration[] = [];
