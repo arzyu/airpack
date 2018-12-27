@@ -2,11 +2,10 @@
 
 import fs from "fs";
 import { resolve, extname } from "path";
-import { spawnSync } from "child_process";
 
-import program from "commander-with-unknown-option-patched";
+import program from "commander";
 import { extensions, Extension } from "interpret";
-import { Configuration } from "webpack";
+import webpack, { Configuration } from "webpack";
 import { getPackageInfo } from "get-package-info";
 
 import autoWebpack from ".";
@@ -17,7 +16,7 @@ program
       (file, result) => [...result, file], [])
   .option("-r, --config-register <module>", "preload one or more modules before loading the webpack configuration",
       (moduleName, result) => [...result, moduleName], [])
-  .allowUnknownOption()
+  .option("-w, --watch", "webpack watch")
   .parse(process.argv);
 
 const options: Configuration[] = [];
@@ -86,11 +85,19 @@ if (!configFiles.length) {
   });
 }
 
-spawnSync(
-  "webpack",
-  ["-c", "/dev/stdin", ...program.args, ...program.unknownOptions],
-  {
-    input: JSON.stringify(options),
-    stdio: [process.stdin, process.stdout, process.stderr]
+const compiler = webpack(options);
+
+const compilerCallback: webpack.ICompiler.Handler = (error, stats) => {
+  if (error) {
+    console.log(error.stack || error);
+  } else {
+    console.log(`${stats.toString()}\n`);
   }
-);
+};
+
+if (program.watch) {
+  compiler.watch({}, compilerCallback);
+  console.log("\nwebpack is watching the files…\n");
+} else {
+  compiler.run(compilerCallback);
+}
