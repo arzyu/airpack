@@ -6,7 +6,8 @@ import { getPackageInfo } from "get-package-info";
 
 const getConfigs = () => {
   const configs: Configuration[] = [];
-  const packageInfo = getPackageInfo(resolve(process.cwd()));
+  const cwd = resolve(process.cwd());
+  const packageInfo = getPackageInfo(cwd);
   const deps = [
     ...Object.keys(packageInfo.dependencies || {}),
     ...Object.keys(packageInfo.devDependencies || {})
@@ -16,7 +17,8 @@ const getConfigs = () => {
     const pattern = /^(@.+\/)?auto-webpack-.+/;
 
     if (pattern.test(dep)) {
-      configs.push(require(dep).default);
+      const depPath = require.resolve(dep, { paths: [cwd] });
+      configs.push(require(depPath).default);
     }
   });
 

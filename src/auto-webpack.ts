@@ -81,11 +81,11 @@ if (!configFiles.length) {
 
   configFiles.forEach(webpackConfig => {
     registerCompiler(extensions[getConfigFileExtension(webpackConfig)]);
-    options.push(autoWebpack(requireConfig(webpackConfig)));
+    options.push(requireConfig(webpackConfig));
   });
 }
 
-const compiler = webpack(options);
+const compiler = webpack(options.map(option => autoWebpack(option)));
 
 const compilerCallback: webpack.ICompiler.Handler = (error, stats) => {
   if (error) {
