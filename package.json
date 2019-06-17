@@ -11,7 +11,6 @@
     "dist"
   ],
   "scripts": {
-    "auto-webpack": "ts-node src/auto-webpack.ts",
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "postbuild": "chmod +x dist/auto-webpack.js",
