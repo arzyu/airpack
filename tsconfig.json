@@ -8,5 +8,5 @@
     "baseUrl": "./",
     "outDir": "./dist"
   },
-  "files": ["src/index.ts", "src/auto-webpack.ts"]
+  "files": ["src/index.ts", "src/zero-webpack.ts"]
 }

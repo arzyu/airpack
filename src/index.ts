@@ -14,7 +14,7 @@ const getConfigs = () => {
   ];
 
   deps.forEach(dep => {
-    const pattern = /^(@.+\/)?auto-webpack-.+/;
+    const pattern = /^(@.+\/)?zero-webpack-.+/;
 
     if (pattern.test(dep)) {
       const depPath = require.resolve(dep, { paths: [cwd] });
@@ -25,6 +25,6 @@ const getConfigs = () => {
   return configs;
 };
 
-const autoWebpack = (config: Configuration) => merge(...getConfigs(), config);
+const zeroWebpack = (config: Configuration) => merge(...getConfigs(), config);
 
-export default autoWebpack;
+export default zeroWebpack;

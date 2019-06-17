@@ -8,7 +8,7 @@ import { extensions, Extension } from "interpret";
 import webpack, { Configuration } from "webpack";
 import { getPackageInfo } from "get-package-info";
 
-import autoWebpack from ".";
+import zeroWebpack from ".";
 
 program
   .version(getPackageInfo(resolve(__dirname, "..")).version)
@@ -17,7 +17,7 @@ program
   .option("-r, --config-register <module>", "preload one or more modules before loading the webpack configuration",
       (moduleName, result) => [...result, moduleName], [])
   .option("-w, --watch", "webpack watch")
-  .option("--debug", "show auto-webpack debug info")
+  .option("--debug", "show zero-webpack debug info")
   .parse(process.argv);
 
 const options: Configuration[] = [];
@@ -86,7 +86,7 @@ if (!configFiles.length) {
   });
 }
 
-const compilerOptions = options.map(option => autoWebpack(option));
+const compilerOptions = options.map(option => zeroWebpack(option));
 
 if (program.debug) {
   console.log(compilerOptions);
