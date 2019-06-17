@@ -17,6 +17,7 @@ program
   .option("-r, --config-register <module>", "preload one or more modules before loading the webpack configuration",
       (moduleName, result) => [...result, moduleName], [])
   .option("-w, --watch", "webpack watch")
+  .option("--debug", "show auto-webpack debug info")
   .parse(process.argv);
 
 const options: Configuration[] = [];
@@ -85,7 +86,13 @@ if (!configFiles.length) {
   });
 }
 
-const compiler = webpack(options.map(option => autoWebpack(option)));
+const compilerOptions = options.map(option => autoWebpack(option));
+
+if (program.debug) {
+  console.log(compilerOptions);
+}
+
+const compiler = webpack(compilerOptions);
 
 const compilerCallback: webpack.ICompiler.Handler = (error, stats) => {
   if (error) {
