@@ -10,6 +10,8 @@ import { getPackageInfo } from "get-package-info";
 
 import zeroWebpack from ".";
 
+const WebpackDevServer = require("webpack-dev-server");
+
 program
   .version(getPackageInfo(resolve(__dirname, "..")).version)
   .option("-c, --config <webpack config file>", "append local webpack config file",
@@ -17,6 +19,7 @@ program
   .option("-r, --config-register <module>", "preload one or more modules before loading the webpack configuration",
       (moduleName, result) => [...result, moduleName], [])
   .option("-w, --watch", "webpack watch")
+  .option("--dev-server", "use webpack-dev-server")
   .option("--debug", "show zero-webpack debug info")
   .parse(process.argv);
 
@@ -93,18 +96,29 @@ if (program.debug) {
 }
 
 const compiler = webpack(compilerOptions);
+const devServerOptions = compilerOptions[0].devServer || {};
 
-const compilerCallback: webpack.ICompiler.Handler = (error, stats) => {
-  if (error) {
-    console.log(error.stack || error);
-  } else {
-    console.log(`${stats.toString()}\n`);
-  }
-};
+if (program.devServer) {
+  const port = process.env.PORT || devServerOptions.port || 3000;
 
-if (program.watch) {
-  compiler.watch({}, compilerCallback);
-  console.log("\nwebpack is watching the files…\n");
+  new WebpackDevServer(compiler, devServerOptions)
+    .listen(port, "0.0.0.0", () => {
+      console.log(`\nStarting server on http://0.0.0.0:${port}\n`);
+    });
+
 } else {
-  compiler.run(compilerCallback);
+  const compilerCallback: webpack.ICompiler.Handler = (error, stats) => {
+    if (error) {
+      console.log(error.stack || error);
+    } else {
+      console.log(`${stats.toString()}\n`);
+    }
+  };
+
+  if (program.watch) {
+    compiler.watch({}, compilerCallback);
+    console.log("\nwebpack is watching the files…\n");
+  } else {
+    compiler.run(compilerCallback);
+  }
 }
