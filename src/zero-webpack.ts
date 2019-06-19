@@ -6,6 +6,7 @@ import { resolve, extname } from "path";
 import program from "commander";
 import { extensions, Extension } from "interpret";
 import webpack, { Configuration } from "webpack";
+import { stdout as colors } from "supports-color";
 import { getPackageInfo } from "get-package-info";
 
 import zeroWebpack from ".";
@@ -107,11 +108,33 @@ if (program.devServer) {
     });
 
 } else {
-  const compilerCallback: webpack.ICompiler.Handler = (error, stats) => {
-    if (error) {
-      console.log(error.stack || error);
-    } else {
-      console.log(`${stats.toString()}\n`);
+  let lastHash: string | null = null;
+
+  const compilerCallback: webpack.ICompiler.Handler = (err, stats) => {
+    if (err) {
+      lastHash = null;
+      console.error(err.stack || err);
+      process.exit(1);
+    }
+
+    if (stats.hash !== lastHash) {
+      lastHash = stats.hash as string;
+
+      if (stats.compilation && stats.compilation.errors.length !== 0) {
+        const errors = stats.compilation.errors;
+        if (errors[0].name === "EntryModuleNotFoundError") {
+          console.error("\n\u001b[1m\u001b[31mInsufficient number of arguments or no entry found.");
+          console.error(
+            "\u001b[1m\u001b[31mAlternatively, run 'webpack(-cli) --help' for usage info.\u001b[39m\u001b[22m\n"
+          );
+        }
+      }
+
+      const statsString = stats.toString({ colors });
+
+      if (statsString) {
+        process.stdout.write(`${statsString}\n`);
+      }
     }
   };
 
