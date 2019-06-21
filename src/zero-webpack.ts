@@ -101,12 +101,7 @@ const devServerOptions = compilerOptions[0].devServer || {};
 
 if (program.devServer) {
   const port = process.env.PORT || devServerOptions.port || 3000;
-
-  new WebpackDevServer(compiler, devServerOptions)
-    .listen(port, "0.0.0.0", () => {
-      console.log(`\nStarting server on http://0.0.0.0:${port}\n`);
-    });
-
+  new WebpackDevServer(compiler, devServerOptions).listen(port, "0.0.0.0");
 } else {
   let lastHash: string | null = null;
 
@@ -124,9 +119,6 @@ if (program.devServer) {
         const errors = stats.compilation.errors;
         if (errors[0].name === "EntryModuleNotFoundError") {
           console.error("\n\u001b[1m\u001b[31mInsufficient number of arguments or no entry found.");
-          console.error(
-            "\u001b[1m\u001b[31mAlternatively, run 'webpack(-cli) --help' for usage info.\u001b[39m\u001b[22m\n"
-          );
         }
       }
 
@@ -140,7 +132,6 @@ if (program.devServer) {
 
   if (program.watch) {
     compiler.watch({}, compilerCallback);
-    console.log("\nwebpack is watching the files…\n");
   } else {
     compiler.run(compilerCallback);
   }
