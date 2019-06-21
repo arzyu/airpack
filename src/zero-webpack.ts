@@ -101,7 +101,8 @@ const devServerOptions = compilerOptions[0].devServer || {};
 
 if (program.devServer) {
   const port = process.env.PORT || devServerOptions.port || 3000;
-  new WebpackDevServer(compiler, devServerOptions).listen(port, "0.0.0.0");
+  const host = devServerOptions.host = process.env.HOST || devServerOptions.host || "localhost";
+  new WebpackDevServer(compiler, devServerOptions).listen(port, host);
 } else {
   let lastHash: string | null = null;
 
