@@ -137,3 +137,5 @@ if (program.devServer) {
     compiler.run(compilerCallback);
   }
 }
+
+/* -*- ts -*- */
