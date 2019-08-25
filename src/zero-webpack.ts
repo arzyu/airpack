@@ -102,6 +102,9 @@ const devServerOptions = compilerOptions[0].devServer || {};
 if (program.devServer) {
   const port = process.env.PORT || devServerOptions.port || 3000;
   const host = devServerOptions.host = process.env.HOST || devServerOptions.host || "localhost";
+
+  devServerOptions.publicPath = devServerOptions.publicPath || "/";
+
   new WebpackDevServer(compiler, devServerOptions).listen(port, host);
 } else {
   let lastHash: string | null = null;
