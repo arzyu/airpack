@@ -93,6 +93,7 @@ if (!configFiles.length) {
 const compilerOptions = options.map(option => zeroWebpack(option));
 
 if (program.debug) {
+  require("util").inspect.defaultOptions.depth = null;
   console.log(compilerOptions);
 }
 
