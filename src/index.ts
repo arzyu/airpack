@@ -1,30 +1,17 @@
-import { resolve } from "path";
-
-import { Configuration } from "webpack";
 import merge from "webpack-merge";
-import { getPackageInfo } from "get-package-info";
 
-const getConfigs = () => {
-  const configs: Configuration[] = [];
-  const cwd = resolve(process.cwd());
-  const packageInfo = getPackageInfo(cwd);
-  const deps = [
-    ...Object.keys(packageInfo.dependencies || {}),
-    ...Object.keys(packageInfo.devDependencies || {})
-  ];
+import { getConfigs } from "./get-configs";
 
-  deps.forEach(dep => {
-    const pattern = /^(@.+\/)?zero-webpack-.+/;
+export const zeroWebpack = (options: object | object[] | undefined) => {
+  const config = merge(...getConfigs());
 
-    if (pattern.test(dep)) {
-      const depPath = require.resolve(dep, { paths: [cwd] });
-      configs.push(require(depPath).default);
-    }
-  });
+  if (!options) return config;
 
-  return configs;
+  if (Array.isArray(options)) {
+    if (options.length === 1) return merge(config, options[0]);
+
+    return [merge(config, options[0]), ...options.slice(1)];
+  }
+
+  return merge(config, options as object);
 };
-
-const zeroWebpack = (config: Configuration) => merge(...getConfigs(), config);
-
-export default zeroWebpack;

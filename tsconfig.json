@@ -7,6 +7,5 @@
     "declaration": true,
     "baseUrl": "./",
     "outDir": "./dist"
-  },
-  "files": ["src/index.ts", "src/zero-webpack.ts"]
+  }
 }
