@@ -25,10 +25,11 @@ program
   .parse(process.argv);
 
 const debugFlag = process.env.DEBUG === "true" ? "--inspect-brk" : "";
+const hook = program.devServer ? "./hook" : "./hook-webpack-cli";
 const pkg = program.devServer ? "webpack-dev-server/bin/webpack-dev-server" : "webpack-cli";
 
 child_process.spawn(
-  `node ${debugFlag} -r ${require.resolve("./hook")} ${require.resolve(pkg)}`,
+  `node ${debugFlag} -r ${require.resolve(hook)} ${require.resolve(pkg)}`,
   program.rawArgs.slice(2),
   {
     env: {
