@@ -20,13 +20,13 @@ const getVersions = () => {
 
 program
   .version(getVersions())
-  .option("--dev-server", "run webpack-dev-server ...")
+  .option("-s, --server", "run webpack-dev-server instead of webpack-cli")
   .allowUnknownOption(true)
   .parse(process.argv);
 
 const debugFlag = process.env.DEBUG === "true" ? "--inspect-brk" : "";
-const hook = program.devServer ? "./hook" : "./hook-webpack-cli";
-const pkg = program.devServer ? "webpack-dev-server/bin/webpack-dev-server" : "webpack-cli";
+const hook = program.server ? "./hook" : "./hook-webpack-cli";
+const pkg = program.server ? "webpack-dev-server/bin/webpack-dev-server" : "webpack-cli";
 
 child_process.spawn(
   `node ${debugFlag} -r ${require.resolve(hook)} ${require.resolve(pkg)}`,
