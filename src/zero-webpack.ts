@@ -3,7 +3,7 @@
 import { resolve, dirname } from "path";
 import child_process from "child_process";
 
-import program from "commander";
+import program from "commander-with-unknown-option-patched";
 import { getPackageInfo } from "get-package-info";
 
 const getVersions = () => {
@@ -31,7 +31,7 @@ const pkg = program.server ? "webpack-dev-server/bin/webpack-dev-server" : "webp
 
 child_process.spawn(
   `node ${debugFlag} -r ${require.resolve(hook)} ${require.resolve(pkg)}`,
-  program.rawArgs.slice(2),
+  program.unknownOptions,
   {
     env: {
       ...process.env,

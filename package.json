@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@types/webpack-merge": "^4.1.5",
-    "commander": "^3.0.1",
+    "commander-with-unknown-option-patched": "github:arzyu/commander-with-unknown-option-patched",
     "get-package-info": "github:arzyu/get-package-info#v0.1.0",
     "webpack": "4.x.x",
     "webpack-cli": "^3.3.8",
