@@ -21,6 +21,7 @@ const getVersions = () => {
 program
   .version(getVersions())
   .option("-s, --server", "run webpack-dev-server instead of webpack-cli")
+  .option("--print", "print webpack configuration")
   .allowUnknownOption(true)
   .parse(process.argv);
 
@@ -34,7 +35,8 @@ child_process.spawn(
   {
     env: {
       ...process.env,
-      ZERO_WEBPACK: require.resolve("..")
+      ZERO_WEBPACK: require.resolve(".."),
+      ZERO_WEBPACK_PRINT: program.print ? "true" : "false"
     },
     stdio: "inherit",
     shell: true
