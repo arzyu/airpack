@@ -1,1 +1,1 @@
-# zero-webpack
+# zeropack

@@ -1,9 +1,9 @@
 {
-  "name": "zero-webpack",
+  "name": "zeropack",
   "version": "0.1.0",
   "description": "Load and merge webpack configurations automatically.",
   "bin": {
-    "zero-webpack": "dist/zero-webpack.js"
+    "zeropack": "dist/zeropack.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "postbuild": "chmod +x dist/zero-webpack.js",
+    "postbuild": "chmod +x dist/zeropack.js",
     "prepare": "npm run build"
   },
   "dependencies": {
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arzyu/zero-webpack"
+    "url": "https://github.com/arzyu/zeropack"
   },
   "license": "MIT"
 }

@@ -13,7 +13,7 @@ export const getConfigs = () => {
   ];
 
   deps.forEach(dep => {
-    const pattern = /^(@.+\/)?zero-webpack-.+/;
+    const pattern = /^(@.+\/)?zeropack-.+/;
 
     if (pattern.test(dep)) {
       const depPath = require.resolve(dep, { paths: [cwd] });

@@ -12,7 +12,7 @@ const getVersions = () => {
   const v3 = getPackageInfo(dirname(require.resolve("webpack-dev-server/package.json"))).version;
 
   return [
-    ` * zero-webpack: ${v1}`,
+    ` * zeropack: ${v1}`,
     ` * webpack-cli: ${v2}`,
     ` * webpack-dev-server: ${v3}`
   ].join("\n");
@@ -35,8 +35,8 @@ child_process.spawn(
   {
     env: {
       ...process.env,
-      ZERO_WEBPACK: require.resolve(".."),
-      ZERO_WEBPACK_PRINT: program.print ? "true" : "false"
+      ZEROPACK: require.resolve(".."),
+      ZEROPACK_PRINT: program.print ? "true" : "false"
     },
     stdio: "inherit",
     shell: true
