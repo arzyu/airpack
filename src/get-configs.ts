@@ -1,12 +1,10 @@
-import { resolve } from "path";
-
 import { Configuration } from "webpack";
-import { getPackageInfo } from "get-package-info";
+import { getJson } from "@arzyu/get-json";
 
 export const getConfigs = () => {
   const configs: Configuration[] = [];
-  const cwd = resolve(process.cwd());
-  const packageInfo = getPackageInfo(cwd);
+  const cwd = process.cwd();
+  const packageInfo = getJson(`${cwd}/package.json`);
   const deps = [
     ...Object.keys(packageInfo.dependencies || {}),
     ...Object.keys(packageInfo.devDependencies || {})

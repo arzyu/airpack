@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import { resolve, dirname } from "path";
+import { resolve } from "path";
 import child_process from "child_process";
 
 import program from "commander-with-unknown-option-patched";
-import { getPackageInfo } from "get-package-info";
+import { getJson } from "@arzyu/get-json";
 
 const getVersions = () => {
-  const v1 = getPackageInfo(resolve(__dirname, "..")).version;
-  const v2 = getPackageInfo(dirname(require.resolve("webpack-cli/package.json"))).version;
-  const v3 = getPackageInfo(dirname(require.resolve("webpack-dev-server/package.json"))).version;
+  const v1 = getJson(resolve(__dirname, "../package.json")).version;
+  const v2 = getJson(require.resolve("webpack-cli/package.json")).version;
+  const v3 = getJson(require.resolve("webpack-dev-server/package.json")).version;
 
   return [
     ` * zeropack: ${v1}`,
