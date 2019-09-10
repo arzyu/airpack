@@ -1,5 +1,5 @@
 {
-  "name": "zeropack",
+  "name": "@zeropack/zeropack",
   "version": "0.1.0",
   "description": "Load and merge webpack configurations automatically.",
   "bin": {
