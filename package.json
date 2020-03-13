@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@arzyu/get-json": "1.0.0",
-    "@types/webpack-merge": "4.1.5",
     "commander-with-unknown-option-patched": "github:arzyu/commander-with-unknown-option-patched#release",
     "webpack": "4.x.x",
     "webpack-cli": "3.3.8",
@@ -26,6 +25,7 @@
     "webpack-merge": "4.2.2"
   },
   "devDependencies": {
+    "@types/webpack-merge": "4.1.5",
     "ts-node": "8.3.0",
     "typescript": "3.6.2"
   },
