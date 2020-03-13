@@ -17,17 +17,17 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@arzyu/get-json": "^1.0.0",
-    "@types/webpack-merge": "^4.1.5",
+    "@arzyu/get-json": "1.0.0",
+    "@types/webpack-merge": "4.1.5",
     "commander-with-unknown-option-patched": "github:arzyu/commander-with-unknown-option-patched#release",
     "webpack": "4.x.x",
-    "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-cli": "3.3.8",
+    "webpack-dev-server": "3.8.0",
+    "webpack-merge": "4.2.2"
   },
   "devDependencies": {
-    "ts-node": "^8.3.0",
-    "typescript": "^3.6.2"
+    "ts-node": "8.3.0",
+    "typescript": "3.6.2"
   },
   "repository": {
     "type": "git",
