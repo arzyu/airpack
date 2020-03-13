@@ -19,9 +19,7 @@
   "dependencies": {
     "@arzyu/get-json": "1.0.0",
     "commander-with-unknown-option-patched": "github:arzyu/commander-with-unknown-option-patched#release",
-    "webpack": "4.x.x",
-    "webpack-cli": "3.3.8",
-    "webpack-dev-server": "3.8.0",
+    "get-package-bin": "0.1.0",
     "webpack-merge": "4.2.2"
   },
   "devDependencies": {
