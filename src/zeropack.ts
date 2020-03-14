@@ -6,20 +6,8 @@ import child_process from "child_process";
 import program from "commander-with-unknown-option-patched";
 import { getJson } from "@arzyu/get-json";
 
-const getVersions = () => {
-  const v1 = getJson(resolve(__dirname, "../package.json")).version;
-  const v2 = getJson(require.resolve("webpack-cli/package.json")).version;
-  const v3 = getJson(require.resolve("webpack-dev-server/package.json")).version;
-
-  return [
-    ` * zeropack: ${v1}`,
-    ` * webpack-cli: ${v2}`,
-    ` * webpack-dev-server: ${v3}`
-  ].join("\n");
-};
-
 program
-  .version(getVersions())
+  .version(getJson(resolve(__dirname, "../package.json")).version)
   .option("-s, --server", "run webpack-dev-server instead of webpack-cli")
   .option("--print", "print webpack configuration")
   .allowUnknownOption(true)
