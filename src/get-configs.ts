@@ -11,7 +11,7 @@ export const getConfigs = () => {
   ];
 
   deps.forEach(dep => {
-    const pattern = /^(@.+\/)?zeropack-.+/;
+    const pattern = /^(@.+\/)?airpack-.+/;
 
     if (pattern.test(dep)) {
       const depPath = require.resolve(dep, { paths: [cwd] });

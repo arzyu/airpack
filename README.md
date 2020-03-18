@@ -1,7 +1,7 @@
-# zeropack
+# airpack
 
 ## Installation
 
 ```shell
-npm add -D @zeropack/zeropack
+npm add --save-dev airpack
 ```

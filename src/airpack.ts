@@ -50,8 +50,8 @@ child_process.spawn(
   {
     env: {
       ...process.env,
-      ZEROPACK: require.resolve(".."),
-      ZEROPACK_PRINT: program.print ? "true" : "false"
+      AIRPACK: require.resolve(".."),
+      AIRPACK_PRINT: program.print ? "true" : "false"
     },
     stdio: "inherit",
     shell: true

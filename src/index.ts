@@ -2,7 +2,7 @@ import merge from "webpack-merge";
 
 import { getConfigs } from "./get-configs";
 
-export const zeropack = (options: object | object[] | undefined) => {
+export const airpack = (options: object | object[] | undefined) => {
   const config = merge(...getConfigs());
 
   if (!options) return config;
