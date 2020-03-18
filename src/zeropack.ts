@@ -4,7 +4,7 @@ import fs, { accessSync } from "fs";
 import { resolve } from "path";
 import child_process from "child_process";
 
-import program from "commander-with-unknown-option-patched";
+import program from "commander";
 import { getPackageBin } from "get-package-bin";
 import { getJson } from "@arzyu/get-json";
 
@@ -46,7 +46,7 @@ const cmd = `node ${debugFlag} -r ${require.resolve(hook)} ${binFile}`;
 
 child_process.spawn(
   cmd,
-  program.unknownOptions,
+  program.args,
   {
     env: {
       ...process.env,
