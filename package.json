@@ -17,15 +17,15 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@arzyu/get-json": "1.0.0",
-    "commander": "5.0.0",
-    "get-package-bin": "0.1.0",
-    "webpack-merge": "4.2.2"
+    "@arzyu/get-json": "^1.0.0",
+    "commander": "^5.0.0",
+    "get-package-bin": "^0.1.0",
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
-    "@types/webpack-merge": "4.1.5",
-    "ts-node": "8.6.2",
-    "typescript": "3.8.3"
+    "@types/webpack-merge": "^4.1.5",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",
