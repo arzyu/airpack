@@ -15,22 +15,22 @@ program
   .allowUnknownOption(true)
   .parse(process.argv);
 
+const dependencies = {
+  "webpack-cli": ["webpack", "webpack-cli"],
+  "webpack-dev-server": ["webpack", "webpack-cli", "webpack-dev-server"]
+};
+const cachePrefix = resolve(__dirname, "../node_modules/.cache");
 const pkg = program.server ? "webpack-dev-server" : "webpack-cli";
-const pkgPath = resolve(process.cwd(), "./node_modules", pkg);
+const pkgPath = resolve(cachePrefix, "node_modules", pkg);
 
 try {
   accessSync(resolve(pkgPath, "package.json"), fs.constants.R_OK);
 } catch (error) {
   if (error.code === "ENOENT") {
-    const dependencies = {
-      "webpack-cli": ["webpack", "webpack-cli"],
-      "webpack-dev-server": ["webpack", "webpack-cli", "webpack-dev-server"]
-    };
-    const installCommand = `npm add ${dependencies[pkg].join(" ")} --no-save --no-save-dev`;
+    const installCommand = `npm add ${dependencies[pkg].join(" ")} --prefix="${cachePrefix}" --loglevel=error --no-save`;
 
-    console.warn(installCommand);
+    console.log(`Cache [${dependencies[pkg].join(", ")}] in:\n  ${resolve(cachePrefix, "node_modules")}`);
     child_process.execSync(installCommand, { stdio: "inherit" });
-
   } else {
     throw error;
   }
