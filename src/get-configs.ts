@@ -11,7 +11,7 @@ export const getConfigs = () => {
   ];
 
   deps.forEach(dep => {
-    const pattern = /^(@.+\/)?airpack-.+/;
+    const pattern = /^(@.+\/)?webpack-config-.+/;
 
     if (pattern.test(dep)) {
       const depPath = require.resolve(dep, { paths: [cwd] });
