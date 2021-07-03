@@ -37,7 +37,7 @@ export const airpackMerge = (config: Config) => {
 
   const nonameOptions = merged.get(UNDEFINED_NAME);
 
-  if (nonameOptions) {
+  if (nonameOptions && merged.size > 1) {
     merged.delete(UNDEFINED_NAME);
 
     // merge UNDEFINED_NAME into all others
