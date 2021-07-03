@@ -11,19 +11,33 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "rm -rf dist",
+    "dev": "npm run build -- --watch",
+    "start:react-webpack-project": "PROJECT=samples/react-webpack-project npm run start",
+    "start": "MAIN=$(npm prefix)/src/airpack.ts; cd $PROJECT && node -r ts-node/register $MAIN",
+    "debug:react-webpack-project": "PROJECT=samples/react-webpack-project npm run debug",
+    "debug": "MAIN=$(npm prefix)/src/airpack.ts; cd $PROJECT && node --inspect-brk -r ts-node/register $MAIN",
     "build": "tsc",
     "postbuild": "chmod +x dist/airpack.js",
-    "prepare": "npm run build"
+    "prepare": "rm -rf dist && npm run build"
   },
   "dependencies": {
     "@arzyu/get-json": "^1.0.0",
-    "commander": "^5.0.0",
+    "@babel/generator": "^7.14.5",
+    "@babel/parser": "^7.14.7",
+    "@babel/template": "^7.14.5",
+    "@babel/traverse": "^7.14.7",
+    "@babel/types": "^7.14.5",
+    "chalk": "^4.1.1",
+    "commander": "^8.0.0",
     "get-package-bin": "^0.1.0",
-    "webpack-merge": "^4.2.2"
+    "interpret": "^2.2.0",
+    "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
-    "@types/webpack-merge": "^4.1.5",
+    "@types/babel__generator": "^7.6.2",
+    "@types/babel__template": "^7.4.0",
+    "@types/babel__traverse": "^7.14.0",
+    "@types/interpret": "^1.1.1",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
   },

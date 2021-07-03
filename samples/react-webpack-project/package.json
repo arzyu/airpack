@@ -1,0 +1,25 @@
+{
+  "name": "react-webpack-project",
+  "version": "0.0.1",
+  "description": "react webpack project",
+  "scripts": {
+    "dev": "NODE_ENV=development airpack --server",
+    "build": "NODE_ENV=production airpack"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@arzyu/webpack-config-web": "^0.1.3",
+    "@types/react": "^17.0.13",
+    "@types/react-dom": "^17.0.8",
+    "airpack": "file:../..",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.5",
+    "webpack": "^5.42.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "private": true
+}
