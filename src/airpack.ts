@@ -66,6 +66,9 @@ if (!opts.autoconfig) {
   );
 }
 
+// remove duplicated configs in place, keep the original priority
+configs.splice(0, configs.length, ...[...new Set(configs.reverse())].reverse())
+
 if (configs.length > 1) {
   runArgs.push("--merge");
 }
