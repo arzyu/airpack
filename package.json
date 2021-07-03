@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "npm run build -- --watch",
     "start:react-webpack-project": "PROJECT=samples/react-webpack-project npm run start",
-    "start": "MAIN=$(npm prefix)/src/airpack.ts; cd $PROJECT && node -r ts-node/register $MAIN",
+    "start": "MAIN=$(npm prefix)/dist/airpack.js; cd $PROJECT && node $MAIN",
     "debug:react-webpack-project": "PROJECT=samples/react-webpack-project npm run debug",
     "debug": "MAIN=$(npm prefix)/src/airpack.ts; cd $PROJECT && node --inspect-brk -r ts-node/register $MAIN",
     "build": "tsc",

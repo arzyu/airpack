@@ -76,7 +76,7 @@ if (configs.length > 1) {
 runArgs.push(...configs.map(config => `--config ${config}`));
 
 const runEnv: { [p: string]: any } = {
-  AIRPACK: require.resolve(".."),
+  AIRPACK: require.resolve("./index"),
   AIRPACK_PRINT: opts.print ? "true" : "false"
 };
 const runOpts = [
