@@ -1,6 +1,6 @@
 {
   "name": "airpack",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Share webpack configuration in different projects",
   "bin": {
     "airpack": "dist/airpack.js"
