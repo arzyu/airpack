@@ -15,11 +15,14 @@ const pkgInfo = getJson(resolve(__dirname, "../package.json"));
 const program = new Command(pkgInfo.name);
 
 program
-  .version(pkgInfo.version)
-  .option<string[]>("-c, --config <file|package...>", "Specify webpack configurations", (v, c) => [...c, v], [])
+  .usage("[options] [other-webpack-options]")
+  .description(pkgInfo.description)
   .option("-s, --server", "Run webpack-dev-server")
-  .option("--no-autoconfig", "Only load webpack configurations which specified using -c, --config")
-  .option("--print", "Print webpack configurations with paths")
+  .option<string[]>("-c, --config <file|package...>", "Specify webpack configs", (v, c) => [...c, v], [])
+  .option("--no-autoconfig", "Only load webpack configs from '-c, --config ...' option")
+  .option("--print", "Print webpack configs with paths, without running webpack")
+  .version(pkgInfo.version, "-v, --version", `Print ${pkgInfo.name} version`)
+  .helpOption("-h, --help", "Print this help")
   .allowUnknownOption(true)
   .parse(process.argv);
 
