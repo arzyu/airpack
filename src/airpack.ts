@@ -19,7 +19,7 @@ program
   .option<string[]>("-c, --config <file|package...>", "Specify webpack configurations", (v, c) => [...c, v], [])
   .option("-s, --server", "Run webpack-dev-server")
   .option("--no-autoconfig", "Only load webpack configurations which specified using -c, --config")
-  .option("--print", "Print webpack configurations")
+  .option("--print", "Print webpack configurations with paths")
   .allowUnknownOption(true)
   .parse(process.argv);
 

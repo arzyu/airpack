@@ -23,7 +23,15 @@ const Visitor: TraverseOptions = {
 
       const astPrint = template.ast(`
         if (process.env.AIRPACK_PRINT === "true") {
-          console.dir(config.options, { depth: null, color: true });
+          const { options, path } = config;
+          const print = (obj) => console.dir(obj, { depth: null, color: true });
+
+          console.log("[airpack] final webpack config:")
+          print(options);
+          console.log("");
+          console.log("[airpack] effective webpack configuration paths:")
+          print(Array.isArray(options) ? options.map(opts => path.get(opts)) : path.get(options));
+
           process.exit();
         }
       `) as t.IfStatement;
