@@ -1,14 +1,36 @@
 import Module from "module";
 
+import chalk from "chalk";
+
+import { getMatchedFiles } from "./specs";
 import { patch } from "./patch.webpack-cli";
+
+const wpc = process.env.AIRPACK_WPC!;
+const wpcVersion = process.env.AIRPACK_WPC_VERSION!;
+const hookFiles = getMatchedFiles(wpcVersion);
+
+if (!hookFiles || !hookFiles.length) {
+  console.error(chalk`[airpack]: {red No files defined for hooking into, ${wpc}@${wpcVersion}}`);
+  process.exit()
+}
+
+const hookStates = hookFiles.map(() => false);
 
 const hookCompile = () => {
   const $_compile = Module.prototype._compile;
 
   Module.prototype._compile = function (content: string, filename: string) {
-    if (filename.endsWith("/webpack-cli/lib/webpack-cli.js")) {
-      content = patch(content);
-      Module.prototype._compile = $_compile;
+    const i = hookFiles.findIndex(file => filename.endsWith(`/${wpc}/${file}`));
+
+    if (i !== -1) {
+      const hookFile = hookFiles[i];
+
+      content = patch(content, hookFile);
+      hookStates[i] = true;
+
+      if (hookStates.every(state => state)) {
+        Module.prototype._compile = $_compile;
+      }
     }
 
     $_compile.call(this, content, filename);

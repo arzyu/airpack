@@ -1,53 +1,47 @@
+import chalk from "chalk";
 import { parse } from "@babel/parser";
-import traverse, { NodePath, TraverseOptions } from "@babel/traverse";
-import * as t from "@babel/types";
-import template from "@babel/template";
 import generate from "@babel/generator";
 
-const Visitor: TraverseOptions = {
-  enter(p) {
-    if (
-      p.isClassDeclaration() &&
-      p.get("id").isIdentifier({ name: "WebpackCLI" })
-    ) {
-      const pMethods = p.get("body.body") as NodePath<t.ClassMethod>[];
-      const pMethodResolveConfig = pMethods.find(m => t.isIdentifier(m.node.key, { name: "resolveConfig" }))!;
-      const pIfCheckConfigName = pMethodResolveConfig.get("body.body.4") as NodePath<t.IfStatement>;
+import { getMatchedFiles, getMatchedHashes, getMatchedTargets } from "./specs";
+import { targetPatch, getTargets, getTargetsHash } from "./adapter";
 
-      const astAirpackMerge = template.ast(`
-        Object.assign(config, require(process.env.AIRPACK).airpackMerge(config));
-      `);
+export const patch = (code: string, filename: string) => {
+  const wpc = process.env.AIRPACK_WPC;
+  const wpcVersion = process.env.AIRPACK_WPC_VERSION!;
+  const files = getMatchedFiles(wpcVersion);
+  const patchIndex = files.indexOf(filename);
 
-      // insert airpack merge before `if (options.configName) {...}`
-      pIfCheckConfigName.insertBefore(astAirpackMerge);
+  const target = getMatchedTargets(wpcVersion)[patchIndex];
 
-      const astPrint = template.ast(`
-        if (process.env.AIRPACK_PRINT === "true") {
-          const { options, path } = config;
-          const print = (obj) => console.dir(obj, { depth: null, color: true });
-
-          console.log("[airpack] final webpack config:")
-          print(options);
-          console.log("");
-          console.log("[airpack] effective webpack configuration paths:")
-          print(Array.isArray(options) ? options.map(opts => path.get(opts)) : path.get(options));
-
-          process.exit();
-        }
-      `) as t.IfStatement;
-
-      // remove `if (options.merge) {...}`, and insert airpack print
-      pIfCheckConfigName.getNextSibling().replaceWith(astPrint);
-
-      p.stop();
-    }
+  if (!target) {
+    console.error(chalk`[airpack]: {red No targets defined in specs for file "${filename}"}`);
+    process.exit()
   }
-};
 
-export const patch = (code: string) => {
   const ast = parse(code);
+  const pTargets = getTargets(ast, target);
 
-  traverse(ast, Visitor);
+  if (!pTargets.length) {
+    console.error(chalk`[airpack]: {red No targets matched to the target "${target}"}`);
+    process.exit()
+  }
+
+  const hash = getMatchedHashes(wpcVersion)[patchIndex];
+
+  if (!hash) {
+    console.error(chalk`[airpack]: {red No hash defined in specs for the target "${target}"}`);
+    process.exit()
+  }
+
+  const pTargetsHash = getTargetsHash(pTargets);
+
+  if (pTargetsHash !== hash) {
+    console.error(chalk`[airpack]: {red Hash not matched to the target "${target}"}`);
+    console.error(chalk`[airpack]: {green ${pTargetsHash}} {gray <-} {red ${hash}}`);
+    process.exit()
+  }
+
+  targetPatch[target](pTargets);
 
   const { code: newCode } = generate(ast, { comments: false });
 

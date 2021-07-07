@@ -16,6 +16,8 @@
     "start": "MAIN=$(npm prefix)/dist/airpack.js; cd $PROJECT && node $MAIN",
     "debug:react-webpack-project": "PROJECT=samples/react-webpack-project npm run debug",
     "debug": "MAIN=$(npm prefix)/src/airpack.ts; cd $PROJECT && node --inspect-brk -r ts-node/register $MAIN",
+    "airpack-check": "node -r ts-node/register scripts/airpack-check.ts",
+    "airpack-check:debug": "node --inspect-brk -r ts-node/register scripts/airpack-check.ts",
     "build": "tsc",
     "postbuild": "chmod +x dist/airpack.js",
     "prepare": "rm -rf dist && npm run build"
@@ -31,6 +33,7 @@
     "commander": "^8.0.0",
     "get-package-bin": "^0.1.0",
     "interpret": "^2.2.0",
+    "semver": "^7.3.5",
     "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
@@ -38,6 +41,9 @@
     "@types/babel__template": "^7.4.0",
     "@types/babel__traverse": "^7.14.0",
     "@types/interpret": "^1.1.1",
+    "@types/pacote": "^11.1.0",
+    "@types/semver": "^7.3.6",
+    "pacote": "^11.3.5",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
   },
