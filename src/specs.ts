@@ -9,7 +9,8 @@ const files: VersionDict = {
   ">=4.3.0 <=4.7.2": ["lib/webpack-cli.js"],
   "4.2.0": ["lib/groups/resolveConfig.js"],
   ">=4.0.0 <=4.1.0": ["lib/groups/ConfigGroup.js"],
-  ">=3.3.7 <=3.3.12": ["bin/utils/convert-argv.js"],
+  ">=3.3.1 <=3.3.12": ["bin/utils/convert-argv.js"],
+  "3.3.0": ["bin/convert-argv.js"],
 };
 
 const targets: VersionDict<Target> = {
@@ -18,6 +19,7 @@ const targets: VersionDict<Target> = {
   ">=4.1.0 <=4.2.0": ["module.exports"],
   "4.0.0": ["handleConfigResolution"],
   ">=3.3.7 <=3.3.12": ["configFileLoaded"],
+  ">=3.3.0 <=3.3.6": ["configFileLoaded~1"],
 };
 
 const hashes: VersionDict = {
@@ -31,6 +33,7 @@ const hashes: VersionDict = {
   ">=4.1.0 <=4.2.0": ["D5K0xMHEYZ3oKccEBCFQMLFn+pQ="],
   "4.0.0": ["Lfv4iFCtCCQ7xJauDSWeWaA9zaM="],
   ">=3.3.7 <=3.3.12": ["Ji3bvavuYLReMnchNbF/KlIhTis="],
+  ">=3.3.0 <=3.3.6": ["klJ7dM4tvXZZi6Zeg8ezskDH5jQ="]
 };
 
 export const getMinVersion = () => {

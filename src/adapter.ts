@@ -8,6 +8,7 @@ export type Target = "WebpackCLI.resolveConfig"
   | "module.exports"
   | "handleConfigResolution"
   | "configFileLoaded"
+  | "configFileLoaded~1"
 ;
 
 export type TargetTest = Record<Target, (p: NodePath) => NodePath[] | void>;
@@ -67,6 +68,10 @@ export const targetTest: TargetTest = {
 
       return pIfCheckConfigFileLoaded ? [pIfCheckConfigFileLoaded] : [];
     }
+  },
+
+  ["configFileLoaded~1"]: (p: NodePath) => {
+    return targetTest["configFileLoaded"](p);
   },
 };
 
@@ -138,6 +143,27 @@ export const targetPatch: TargetPatch = {
     const ast = template.ast(`
       if (!configFileLoaded) {
         return processConfiguredOptions();
+      } else {
+        const { mergeConfig, printConfig } = require(process.env.AIRPACK);
+        const { options: mergedOptions } = mergeConfig({ options });
+
+        if (process.env.AIRPACK_PRINT === "true") {
+          printConfig({ options: mergedOptions });
+          process.exit();
+        }
+
+        return processConfiguredOptions(mergedOptions);
+      }
+    `) as t.IfStatement;
+
+    pIfCheckConfigFileLoaded.replaceWith(ast);
+  },
+
+  ["configFileLoaded~1"]: (targets: NodePath[]) => {
+    const pIfCheckConfigFileLoaded = targets[0];
+    const ast = template.ast(`
+      if (!configFileLoaded) {
+        return processConfiguredOptions({});
       } else {
         const { mergeConfig, printConfig } = require(process.env.AIRPACK);
         const { options: mergedOptions } = mergeConfig({ options });
