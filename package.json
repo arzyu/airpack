@@ -1,6 +1,6 @@
 {
   "name": "airpack",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Solution for modular webpack configuration. Give webpack the ability to read configs from dependencies, and merge them in a more appropriate way.",
   "bin": {
     "airpack": "dist/airpack.js"
