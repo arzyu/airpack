@@ -7,8 +7,8 @@ type VersionDict<T = string> = { [range: string]: T[] };
 const files: VersionDict = {
   ">4.7.2": ["lib/webpack-cli.js"], // handle future versions
   ">=4.3.0 <=4.7.2": ["lib/webpack-cli.js"],
-  ">=4.1.0 <=4.2.0": ["lib/groups/resolveConfig.js"],
-  "4.0.0": ["lib/groups/ConfigGroup.js"],
+  "4.2.0": ["lib/groups/resolveConfig.js"],
+  ">=4.0.0 <=4.1.0": ["lib/groups/ConfigGroup.js"],
   ">=3.3.7 <=3.3.12": ["bin/utils/convert-argv.js"],
 };
 
@@ -21,13 +21,13 @@ const targets: VersionDict<Target> = {
 };
 
 const hashes: VersionDict = {
-  ">4.7.2": ["eGtDnA0PxaXmK857tBJWhNOcVJY="], // handle future versions
-  ">=4.7.1 <=4.7.2": ["eGtDnA0PxaXmK857tBJWhNOcVJY="],
-  ">=4.6.0 <=4.7.0": ["R8gPwb7l8Z8fOpJSu8ZOlCFoSeA="],
-  "4.5.0": ["vvvTC+rcp1lMMcXw5FeUzwqpGVs="],
-  "4.4.0": ["gDNnbEVRbMYcjgYPvOtIrFhxZ1Q="],
-  "4.3.1": ["gRCKJYSGq1A7qt6rAQA4Ta6ZnCM="],
-  "4.3.0": ["UAqNLevYHDlG2B/ttXFeKpJykXs="],
+  ">4.7.2": ["PdWKX+Iet4AbhXI71luKErvq22c="], // handle future versions
+  ">=4.7.1 <=4.7.2": ["PdWKX+Iet4AbhXI71luKErvq22c="],
+  ">=4.6.0 <=4.7.0": ["ubAoOcH7DL7wlX4BxX2FHggRo/c="],
+  "4.5.0": ["3gvgTuoaJxCUMHISiOWBvLXla9U="],
+  "4.4.0": ["PnEhMbqUYVg7yE2E8RcJq5DxIYk="],
+  "4.3.1": ["alXehzyVc8VPgcpSm+uavSNMS9o="],
+  "4.3.0": ["f1IBdo+sfSo5kV3MDJYTTUSHlnQ="],
   ">=4.1.0 <=4.2.0": ["D5K0xMHEYZ3oKccEBCFQMLFn+pQ="],
   "4.0.0": ["Lfv4iFCtCCQ7xJauDSWeWaA9zaM="],
   ">=3.3.7 <=3.3.12": ["Ji3bvavuYLReMnchNbF/KlIhTis="],
