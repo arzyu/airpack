@@ -62,9 +62,10 @@ const opts = program.opts();
     process.exit();
   }
 
-  new Set(vMatched).forEach((version) => {
-    check(wpc, version);
-  });
+  for (const version of new Set(vMatched)) {
+    await check(wpc, version);
+    console.log();
+  }
 
 })();
 
