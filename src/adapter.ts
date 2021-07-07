@@ -7,6 +7,7 @@ import { sha1 } from "./sha1";
 export type Target = "WebpackCLI.resolveConfig"
   | "module.exports"
   | "handleConfigResolution"
+  | "configFileLoaded"
 ;
 
 export type TargetTest = Record<Target, (p: NodePath) => NodePath[] | void>;
@@ -65,6 +66,20 @@ export const targetTest: TargetTest = {
       }
 
       return [];
+    }
+  },
+  ["configFileLoaded"]: (p: NodePath) => {
+    if (
+      p.isProgram()
+    ) {
+      const pModuleExports = p.get("body").find(($, i, items) => i === items.length - 1) as NodePath<t.ExpressionStatement>;
+      const pIfCheckConfigFileLoaded = pModuleExports?.get("expression.right.body.body").find((item) => (
+        item.isIfStatement() &&
+        item.get("test").isUnaryExpression() &&
+        t.isIdentifier((item.get("test.argument") as NodePath).node, { name: "configFileLoaded" })
+      ));
+
+      return pIfCheckConfigFileLoaded ? [pIfCheckConfigFileLoaded] : [];
     }
   },
 };
@@ -128,6 +143,26 @@ export const targetPatch: TargetPatch = {
     // insert airpack before `await resolveConfigMerging(args);`, and remove original merge
     pCallResolveConfigMerging.insertBefore(astAirpack);
     pCallResolveConfigMerging.remove();
+  },
+  ["configFileLoaded"]: (targets: NodePath[]) => {
+    const pIfCheckConfigFileLoaded = targets[0];
+    const code = template.ast(`
+      if (!configFileLoaded) {
+        return processConfiguredOptions();
+      } else {
+        const { mergeConfig, printConfig } = require(process.env.AIRPACK);
+        const { options: mergedOptions } = mergeConfig({ options });
+
+        if (process.env.AIRPACK_PRINT === "true") {
+          printConfig({ options: mergedOptions });
+          process.exit();
+        }
+
+        return processConfiguredOptions(mergedOptions);
+      }
+    `) as t.IfStatement;
+
+    pIfCheckConfigFileLoaded.replaceWith(code);
   },
 };
 
