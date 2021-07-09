@@ -1,5 +1,7 @@
 # airpack
 
+![build](https://github.com/arzyu/airpack/actions/workflows/main.yml/badge.svg) ![npm](https://img.shields.io/npm/v/airpack?label=airpack)
+
 >Support `webpack-cli` version `>= 3.0.0`
 
 airpack is a wrapper for webpack-cli. Designed to allow you to use webpack more elegantly.

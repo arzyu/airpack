@@ -1,5 +1,7 @@
 # airpack
 
+![build](https://github.com/arzyu/airpack/actions/workflows/main.yml/badge.svg) ![npm](https://img.shields.io/npm/v/airpack?label=airpack)
+
 >[Readme in English](https://github.com/arzyu/airpack/blob/master/README.en.md), Translated by Google, [require improvements](https://github.com/arzyu/airpack/issues/5).
 
 >支持 `webpack-cli` 版本 `>= 3.0.0`
