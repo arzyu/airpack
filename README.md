@@ -71,7 +71,14 @@ Options:
  * 如果有使用 `airpack -c, --config` 引入的 webpack 配置文件或包，依次将**它们**加入配置列表末尾
 
 在配置列表中，靠后的配置优先级更高，在合并时会覆盖前面配置中的项目。
-上面的范例中，如果我们运行 `airpack -c file-a.js -c package-b -c package-c/internal`，可能会得到这样的配置列表：
+
+上面的范例中，如果我们运行：
+
+```shell
+airpack -c file-a.js -c package-b -c package-c/internal
+```
+
+可能会得到这样的配置列表：
 
 ```json
 [
