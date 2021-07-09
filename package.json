@@ -39,7 +39,7 @@
   "devDependencies": {
     "@types/babel__generator": "^7.6.2",
     "@types/babel__template": "^7.4.0",
-    "@types/babel__traverse": "^7.14.0",
+    "@types/babel__traverse": "^7.14.2",
     "@types/interpret": "^1.1.1",
     "@types/pacote": "^11.1.0",
     "@types/semver": "^7.3.6",
