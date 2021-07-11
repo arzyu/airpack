@@ -1,6 +1,6 @@
 # airpack
 
-![build](https://github.com/arzyu/airpack/actions/workflows/main.yml/badge.svg) ![npm](https://img.shields.io/npm/v/airpack?label=airpack)
+![build](https://github.com/arzyu/airpack/actions/workflows/npm-build.yml/badge.svg) ![npm](https://img.shields.io/npm/v/airpack?label=airpack)
 
 >[Readme in English](https://github.com/arzyu/airpack/blob/master/README.en.md), Translated by Google, [require improvements](https://github.com/arzyu/airpack/issues/5).
 
