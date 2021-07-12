@@ -1,10 +1,8 @@
 # airpack
 
-![build](https://github.com/arzyu/airpack/actions/workflows/npm-build.yml/badge.svg) ![npm](https://img.shields.io/npm/v/airpack?label=airpack)
+![npm](https://img.shields.io/npm/v/airpack) ![npm peer dependency version](https://img.shields.io/npm/dependency-version/airpack/peer/webpack-cli) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/arzyu/airpack/Build)
 
 >[Readme in English](https://github.com/arzyu/airpack/blob/master/README.en.md), Translated by Google, [require improvements](https://github.com/arzyu/airpack/issues/5).
-
->支持 `webpack-cli` 版本 `>= 3.0.0`
 
 airpack 是一个 webpack-cli 的包装器。旨在让你更优雅的使用 webpack。
 
