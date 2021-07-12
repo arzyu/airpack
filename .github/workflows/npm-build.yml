@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ $default_branch ]
+    branches: [ main ]
   pull_request:
-    branches: [ $default_branch ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
