@@ -53,6 +53,11 @@ export const getFutureVersionsRange = () => {
   return minVersionsDict[maxVersion];
 };
 
+export const isFutureVersion = (version: string) => {
+  const futureRange = getFutureVersionsRange();
+  return satisfies(version, futureRange);
+};
+
 export const getMatchedFiles = (version: string) => {
   const matchedRange = Object.keys(files).find(range => satisfies(version, range))
   return matchedRange ? files[matchedRange] : [];

@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { parse } from "@babel/parser";
 import generate from "@babel/generator";
 
-import { getMatchedFiles, getMatchedHashes, getMatchedTargets } from "./specs";
+import { getMatchedFiles, getMatchedHashes, getMatchedTargets, isFutureVersion } from "./specs";
 import { targetPatch, getTargets, getTargetsHash } from "./adapter";
 
 export const patch = (code: string, filename: string) => {
@@ -36,6 +36,12 @@ export const patch = (code: string, filename: string) => {
   const pTargetsHash = getTargetsHash(pTargets);
 
   if (pTargetsHash !== hash) {
+    if (isFutureVersion(wpcVersion)) {
+      console.error(chalk`[airpack]: {red Target "${target}" has changed since the version of "${wpc}@${wpcVersion}"}`);
+      console.error(chalk`[airpack]: {gray Did you use the latest version of airpack? If so, please go to}`);
+      console.error(chalk`[airpack]: {gray https://github.com/arzyu/airpack/issues to report this error.}`);
+      process.exit()
+    }
     console.error(chalk`[airpack]: {red Hash not matched to the target "${target}"}`);
     console.error(chalk`[airpack]: {green ${pTargetsHash}} {gray <-} {red ${hash}}`);
     process.exit()
