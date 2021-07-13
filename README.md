@@ -1,6 +1,6 @@
 # airpack
 
-![npm](https://img.shields.io/npm/v/airpack) ![npm peer dependency version](https://img.shields.io/npm/dependency-version/airpack/peer/webpack-cli) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/arzyu/airpack/Build)
+![npm package version](https://img.shields.io/npm/v/airpack) ![npm peer dependency version](https://img.shields.io/npm/dependency-version/airpack/peer/webpack-cli) ![build status](https://img.shields.io/github/workflow/status/arzyu/airpack/Build)
 
 Read this in other languages: [English](https://github.com/arzyu/airpack/blob/main/README.en.md)
 
