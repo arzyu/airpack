@@ -31,8 +31,6 @@ $(npm bin)/airpack --help
 ```
 Usage: airpack [options] [other-webpack-options]
 
-Solution for modular webpack configuration. Give webpack the ability to read configs from dependencies, and merge them in a more appropriate way.
-
 Options:
   -s, --server                    Run webpack-dev-server
   -c, --config <file|package...>  Specify webpack configs (default: [])
