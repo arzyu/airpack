@@ -19,9 +19,9 @@ const program = new Command(pkgInfo.name);
 program
   .usage("[options] [other-webpack-options]")
   .description(pkgInfo.description)
-  .option("-s, --server", "Run webpack-dev-server")
+  .option("-s, --server", `Run "webpack serve"`)
   .option<string[]>("-c, --config <file|package...>", "Specify webpack configs", (v, c) => [...c, v], [])
-  .option("--no-autoconfig", "Only load webpack configs from '-c, --config ...' option")
+  .option("--no-autoconfig", `Only load webpack configs from "-c, --config ..." option`)
   .option("--print", "Print webpack configs with paths, without running webpack")
   .addOption(new Option("--no-patch", "Run webpack without patching, for airpack development").hideHelp())
   .version(pkgInfo.version, "-v, --version", `Print ${pkgInfo.name} version`)
