@@ -70,9 +70,7 @@ export const targetTest: TargetTest = {
     }
   },
 
-  ["configFileLoaded~1"]: (p: NodePath) => {
-    return targetTest["configFileLoaded"](p);
-  },
+  ["configFileLoaded~1"]: (p: NodePath) => targetTest["configFileLoaded"](p),
 };
 
 type TargetPatch = Record<Target, (targets: NodePath[]) =>  void>;
