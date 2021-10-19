@@ -1,6 +1,6 @@
 {
   "name": "airpack",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A better solution for sharing webpack config in multiple projects. It gives webpack the ability to read configs from dependencies and merge them in a more appropriate way.",
   "bin": {
     "airpack": "dist/airpack.js"
