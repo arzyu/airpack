@@ -8,7 +8,7 @@ When airpack loads the webpack-cli module on the node, it adds functional enhanc
 
 There are many benefits to using webpack configuration in this way:
 
- * The project directory will be cleaner, with only project-related logic, no `.babelrc.*`, `postcss.config.js`, `.eslintrc.*`,..., and even `webpack.config.*` is not needed. Project templated will be more convenient. See [arzyu/react-webpack-playground](https://github.com/arzyu/react-webpack-playground).
+ * The project directory will be cleaner, with only project-related logic, no `.babelrc.*`, `postcss.config.js`, `.eslintrc.*`,..., and even `webpack.config.*` is not needed. Project templated will be more convenient. See [react-webpack-playground](https://github.com/arzyu/react-webpack-playground).
 
  * With fewer `devDependencies`, the length of the dependency list is shortened from one arm to one finger, and all dependencies related to webpack configuration are placed in a separate `webpack-config-*` package.
 

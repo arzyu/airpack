@@ -10,7 +10,7 @@ airpack 在 node 加载 webpack-cli 模块时，给 webpack-cli 打上功能增�
 
 通过这种方式使用 webpack 配置会有很多好处：
 
- * 项目目录会更干净，只有项目相关的逻辑，没有 `.babelrc.*`、`postcss.config.js`、`.eslintrc.*`、…，甚至也不需要 `webpack.config.*`。项目模板化会更方便。可以参看范例项目：[arzyu/react-webpack-playground](https://github.com/arzyu/react-webpack-playground)。
+ * 项目目录会更干净，只有项目相关的逻辑，没有 `.babelrc.*`、`postcss.config.js`、`.eslintrc.*`、…，甚至也不需要 `webpack.config.*`。项目模板化会更方便。可以参看范例项目：[react-webpack-playground](https://github.com/arzyu/react-webpack-playground)。
 
  * 使用更少的 `devDependencies`，依赖列表的长度从一个胳膊缩短到了一根手指，所有与 webpack 配置相关的依赖都放在独立的 `webpack-config-*` 包中。
 
