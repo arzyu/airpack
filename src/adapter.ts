@@ -37,12 +37,12 @@ export const targetTest: TargetTest = {
       p.isClassDeclaration() &&
       t.isIdentifier(p.get("id").node, { name: "WebpackCLI" })
     ) {
-      const pMethodResolveConfig = p.get("body.body").find((item) => (
+      const pMethodLoadConfig = p.get("body.body").find((item) => (
         item.isClassMethod() &&
         t.isIdentifier(item.get("key").node, { name: "loadConfig" })
       ));
 
-      return pMethodResolveConfig ? [pMethodResolveConfig] : [];
+      return pMethodLoadConfig ? [pMethodLoadConfig] : [];
     }
   },
 
