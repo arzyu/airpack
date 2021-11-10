@@ -49,6 +49,7 @@ Taking the webpack configuration [@arzyu/webpack-config-web](https://github.com/
   "devDependencies": {
     "@arzyu/webpack-config-web": "^0.1.3",
     "airpack": "^1.0.1",
+    "webpack": "^5.33.2",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
