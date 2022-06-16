@@ -25,8 +25,9 @@ const targets: VersionDict<Target> = {
 };
 
 const hashes: VersionDict = {
-  ">4.9.0": ["tx1XPx73YWoENGjXjXR0hWdVSm8="], // handle future versions
-  "4.9.0": ["tx1XPx73YWoENGjXjXR0hWdVSm8="],
+  ">4.10.0": ["rCQ126ukG6NldCsqBZkAoKOyC68="], // handle future versions
+  "4.10.0": ["rCQ126ukG6NldCsqBZkAoKOyC68="],
+  ">=4.9.0 <=4.9.2": ["tx1XPx73YWoENGjXjXR0hWdVSm8="],
   "4.8.0": ["ibeuWy4WTzkXGcgf8YRV06uLljA="],
   ">=4.7.1 <=4.7.2": ["PdWKX+Iet4AbhXI71luKErvq22c="],
   ">=4.6.0 <=4.7.0": ["ubAoOcH7DL7wlX4BxX2FHggRo/c="],
