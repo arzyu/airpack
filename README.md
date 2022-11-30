@@ -182,6 +182,26 @@ Step 3，将没有 `name` 属性的 `undefined` 分组分别和其它的分组�
 
 注意：如果配置列表中所有的配置对象都没有 `name` 属性，那么所有配置对象会被合并进一个对象，这与 webpack-cli 的合并逻辑相同。
 
+## airpack 开发
+
+新版本 `webpack-cli` 版本适配步骤：
+
+1. 检查新版本 `webpack-cli` 适配情况：
+
+```shell
+$ npm run airpack-check ">4.10.0"
+
+> airpack@1.4.0 airpack-check /PATH/TO/airpack
+> node -r ts-node/register scripts/airpack-check.ts ">4.10.0"
+
+[airpack-check]: Checking webpack-cli@5.0.0 ...
+[airpack-check]: Hash not matched to the target "WebpackCLI.loadConfig"
+[airpack-check]: SMd2eWJHlrP/Mnza0CV2+/k965k= <- rCQ126ukG6NldCsqBZkAoKOyC68=
+```
+
+2. 如有必要，编辑 `specs.ts` 增加新的适配版本
+3. 如有必要，编辑 `adapter.ts` 增加新的代码适配器，可借助 [AST Explorer](https://astexplorer.net/) 定位代码位置。
+
 ## License
 
 MIT
