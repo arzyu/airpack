@@ -7,6 +7,7 @@ import { sha1 } from "./sha1";
 export type Target = "WebpackCLI.resolveConfig"
   | "WebpackCLI.resolveConfig~1"
   | "WebpackCLI.loadConfig"
+  | "WebpackCLI.loadConfig~1"
   | "module.exports"
   | "handleConfigResolution"
   | "configFileLoaded"
@@ -45,6 +46,8 @@ export const targetTest: TargetTest = {
       return pMethodLoadConfig ? [pMethodLoadConfig] : [];
     }
   },
+
+  ["WebpackCLI.loadConfig~1"]: (p: NodePath) => targetTest["WebpackCLI.loadConfig"](p),
 
   ["module.exports"]: (p: NodePath) => {
     if (
@@ -140,6 +143,28 @@ export const targetPatch: TargetPatch = {
 
   ["WebpackCLI.loadConfig"]: (targets: NodePath[]) => {
     const pIfCheckConfigName = targets[0].get("body.body.4") as NodePath<t.IfStatement>;
+    const astMerge = template.ast(`
+      const { mergeConfig, printConfig } = require(process.env.AIRPACK);
+
+      Object.assign(config, mergeConfig(config));
+    `);
+
+    // insert airpack merge before `if (options.configName) {...}`
+    pIfCheckConfigName.insertBefore(astMerge);
+
+    const astPrint = template.ast(`
+      if (process.env.AIRPACK_PRINT === "true") {
+        printConfig(config);
+        process.exit();
+      }
+    `) as t.IfStatement;
+
+    // remove `if (options.merge) {...}`, and insert airpack print
+    pIfCheckConfigName.getNextSibling().replaceWith(astPrint);
+  },
+
+  ["WebpackCLI.loadConfig~1"]: (targets: NodePath[]) => {
+    const pIfCheckConfigName = targets[0].get("body.body.5") as NodePath<t.IfStatement>;
     const astMerge = template.ast(`
       const { mergeConfig, printConfig } = require(process.env.AIRPACK);
 

@@ -14,8 +14,9 @@ const files: VersionDict = {
 };
 
 const targets: VersionDict<Target> = {
-  ">4.9.0": ["WebpackCLI.loadConfig"], // handle future versions
-  "4.9.0": ["WebpackCLI.loadConfig"],
+  ">5.0.0": ["WebpackCLI.loadConfig~1"], // handle future versions
+  "5.0.0": ["WebpackCLI.loadConfig~1"],
+  ">=4.9.0 <=4.10.0": ["WebpackCLI.loadConfig"],
   "4.8.0": ["WebpackCLI.resolveConfig~1"],
   ">=4.3.0 <=4.7.2": ["WebpackCLI.resolveConfig"],
   ">=4.1.0 <=4.2.0": ["module.exports"],
@@ -25,7 +26,8 @@ const targets: VersionDict<Target> = {
 };
 
 const hashes: VersionDict = {
-  ">4.10.0": ["rCQ126ukG6NldCsqBZkAoKOyC68="], // handle future versions
+  ">5.0.0": ["SMd2eWJHlrP/Mnza0CV2+/k965k="], // handle future versions
+  "5.0.0": ["SMd2eWJHlrP/Mnza0CV2+/k965k="],
   "4.10.0": ["rCQ126ukG6NldCsqBZkAoKOyC68="],
   ">=4.9.0 <=4.9.2": ["tx1XPx73YWoENGjXjXR0hWdVSm8="],
   "4.8.0": ["ibeuWy4WTzkXGcgf8YRV06uLljA="],
